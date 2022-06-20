@@ -25,8 +25,8 @@ const MenuBar = () => {
                                     <Nav.Link href="/Ovas">OVAS</Nav.Link>
                                     <NavDropdown title="My Lists" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="/Watching">Watching</NavDropdown.Item>
-                                        <NavDropdown.Item href="#Finished">Finished</NavDropdown.Item>
-                                        <NavDropdown.Item href="#Favorites">Favorites</NavDropdown.Item>
+                                        <NavDropdown.Item href="/Finished">Finished</NavDropdown.Item>
+                                        <NavDropdown.Item href="/Favorites">Favorites</NavDropdown.Item>
                                         <NavDropdown.Item href="/Watchlist">Watchlist</NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>

@@ -1,9 +1,17 @@
+.header {
+    max-width: 100% !important;
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+    padding-left: 0% !important;
+    padding-right: 0% !important;
+}
+
 header{
     color: white;
     background: #37387a;
-    min-height: 50vh;
-    padding-top: 33vh;
-    padding-bottom: 33vh;
+    min-height: 80vh;
+    padding-top: 20vh;
+    padding-bottom: 20vh;
     text-align: center;
     position: relative;
     z-index: 1;

@@ -26,7 +26,7 @@ const LogIn = () => {
 
                     <button type="submit" className="btn btn-dark btn-lg btn-block">Log in</button>
                     <p className="forgot-password text-right">
-                        Forgot <a href="#">password?</a>
+                        Forgot <a href="/">password?</a>
                     </p>
                 </form>
             </section>

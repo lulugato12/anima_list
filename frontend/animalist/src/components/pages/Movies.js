@@ -1,11 +1,9 @@
-import React from 'react'
-import Header from '../misc/Header'
 import Poster from "../misc/Poster";
+import React from 'react'
 
-const Home = () => {
+const Movies = () => {
     return (
         <React.Fragment>
-            <Header />
             <Poster title='Recommended for you' url='discover/tv?api_key=141c72c7acc3ea796e0d0dc48bd8273c&with_networks=213'/>
             <Poster isSmall title='Trending' url='trending/all/week?api_key=141c72c7acc3ea796e0d0dc48bd8273c&language=en-US'/>
             <Poster isSmall title='Action' url='discover/movie?api_key=141c72c7acc3ea796e0d0dc48bd8273c&with_genres=28'/>
@@ -17,4 +15,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Movies;
