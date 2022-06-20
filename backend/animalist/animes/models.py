@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Tipo(models.Model):
     name = models.CharField(max_length = 20)
@@ -13,3 +14,8 @@ class Anime(models.Model):
     episodes = models.IntegerField(null = True)
     synopsis = models.TextField()
     aired = models.IntegerField(null = True)
+
+class Rating(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.SET_NULL, related_name = 'ratings', null = True)
+    anime = models.ForeignKey('Anime', on_delete = models.CASCADE, related_name = 'ratings')
+    value = models.IntegerField()
