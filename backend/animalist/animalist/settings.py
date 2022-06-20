@@ -39,11 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'animes',
-    'genres',
-    'ratings',
-    'tipos',
-    'matches',
-    'listas',
 ]
 
 MIDDLEWARE = [
