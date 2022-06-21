@@ -1,6 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
-from .models import Anime, Tipo, Genre, Rating, Lista
+from .models import Anime, Tipo, Genre, Lista
 
 class TipoType(DjangoObjectType):
     class Meta:
@@ -13,10 +13,6 @@ class GenreType(DjangoObjectType):
 class AnimeType(DjangoObjectType):
     class Meta:
         model = Anime
-
-class RatingType(DjangoObjectType):
-    class Meta:
-        model = Rating
 
 class ListaType(DjangoObjectType):
     class Meta:
@@ -56,8 +52,9 @@ class CreateAnime(graphene.Mutation):
         episodes = graphene.Int()
         synopsis = graphene.String(required = True)
         aired = graphene.Int()
+        rating = graphene.Float(required = True)
 
-    def mutate(self, info, title, genre_id, tipo_id, synopsis, episodes = None, aired = None):
+    def mutate(self, info, title, genre_id, tipo_id, synopsis, rating, episodes = None, aired = None):
         genre = Genre.objects.filter(id = genre_id).first()
         if not genre:
             raise Exception('invalid genre.')
@@ -66,28 +63,10 @@ class CreateAnime(graphene.Mutation):
         if not tipo:
             raise Exception('invalid tipo.')
 
-        anime = Anime(title = title, genre = genre, tipo = tipo, episodes = episodes, synopsis = synopsis, aired = aired)
+        anime = Anime(title = title, genre = genre, tipo = tipo, episodes = episodes, synopsis = synopsis, aired = aired, rating = rating)
         anime.save()
 
         return CreateAnime(anime = anime)
-
-class CreateRating(graphene.Mutation):
-    rating = graphene.Field(RatingType)
-
-    class Arguments:
-        anime_id = graphene.Int(required = True)
-        value = graphene.Int(required = True)
-
-    def mutate(self, info, anime_id, value):
-        user = info.context.user
-        if user.is_anonymous:
-            raise Exception('log in >:(.')
-
-        anime = Anime.objects.filter(id = anime_id).first()
-        rating = Rating(user = user, anime = anime, value = value)
-        rating.save()
-
-        return CreateRating(rating = rating)
 
 class CreateLista(graphene.Mutation):
     lista = graphene.Field(ListaType)
@@ -149,7 +128,6 @@ class Mutation(graphene.ObjectType):
     create_tipo = CreateTipo.Field()
     create_genre = CreateGenre.Field()
     create_anime = CreateAnime.Field()
-    create_rating = CreateRating.Field()
     create_lista = CreateLista.Field()
     add_anime = AddAnime.Field()
     add_genre = AddGenre.Field()
@@ -158,7 +136,6 @@ class Query(graphene.ObjectType):
     animes = graphene.List(AnimeType)
     tipos = graphene.List(TipoType)
     genres = graphene.List(GenreType)
-    ratings = graphene.List(RatingType)
     listas = graphene.List(ListaType)
 
     def resolve_animes(self, info):
@@ -169,9 +146,6 @@ class Query(graphene.ObjectType):
 
     def resolve_genres(self, info):
         return Genre.objects.all()
-
-    def resolve_ratings(self, info):
-        return Rating.objects.all()
 
     def resolve_listas(self, info):
         return Lista.objects.all()
