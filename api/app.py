@@ -36,6 +36,6 @@ def read_root(id):
         search['result'] =  search['genre'].apply(lambda x: jaccard_score(row[1]['genre'], x))
         search_result = search.sort_values('result', ascending=False)['title'].head(10)
         indexes = search_result.index
-        output = json.dumps({"animes": list(zip(indexes, search_result.to_dict().values(), animes['image_url'][indexes].to_dict().values()))})
+        output = json.dumps({"animes": animes['image_url'][indexes].tolist()})
 
     return output
