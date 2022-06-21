@@ -13,7 +13,6 @@ const SignUp = () => {
             <ApolloProvider client={client}>
                 <section className="content-container">
                     <CreateUser />
-                    
                 </section>
             </ApolloProvider>
         </React.Fragment>
