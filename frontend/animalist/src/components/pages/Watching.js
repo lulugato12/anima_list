@@ -1,13 +1,16 @@
-import Poster from "../misc/Poster";
 import React from "react";
+import { Container } from "react-bootstrap";
+import Recommendation from "../misc/Recommendation";
+import "./List.css";
 
 const Anime = () => {
+  const id = 56;
   return (
     <>
-      <Poster
-        title="Currently watching"
-        url="discover/tv?api_key=141c72c7acc3ea796e0d0dc48bd8273c&with_networks=213"
-      />
+    <Container className="cont-list">
+      <h1 className="tittle-list">Currently watching</h1>
+      <Recommendation title="Recommended" url={`/${id}/pictures`} />
+    </Container>
     </>
   );
 };
