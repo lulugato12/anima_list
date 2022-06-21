@@ -1,10 +1,12 @@
 from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
+
 import numpy as np
 import pandas as pd
 import itertools
 import collections
 from sklearn.metrics import jaccard_score
-import json
 
 app = FastAPI()
 
@@ -36,6 +38,6 @@ def read_root(id):
         search['result'] =  search['genre'].apply(lambda x: jaccard_score(row[1]['genre'], x))
         search_result = search.sort_values('result', ascending=False)['title'].head(10)
         indexes = search_result.index
-        output = json.dumps({"animes": animes['image_url'][indexes].tolist()})
+        output = jsonable_encoder(animes['image_url'][indexes].tolist())
 
-    return output
+    return JSONResponse(content=output)
