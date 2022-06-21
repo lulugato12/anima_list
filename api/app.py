@@ -37,7 +37,7 @@ def read_root(id):
         search = anime_feature.drop([row[0]])
         search['result'] =  search['genre'].apply(lambda x: jaccard_score(row[1]['genre'], x))
         search_result = search.sort_values('result', ascending=False)['title'].head(10)
-        indexes = search_result.index
-        output = jsonable_encoder(animes['image_url'][indexes].tolist())
+        indexes = search_result.index.tolist()
+        output = jsonable_encoder(indexes)
 
     return JSONResponse(content=output)
