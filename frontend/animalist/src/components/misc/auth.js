@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { gql, useMutation } from "@apollo/react-hooks";
 import { AUTH_TOKEN } from "../constants/constants";
-import "./auth.css";
+import "./Auth.css";
 import { Form, Container } from "react-bootstrap";
 
 const SIGNUP_MUTATION = gql`

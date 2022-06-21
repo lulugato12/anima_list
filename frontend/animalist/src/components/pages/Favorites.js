@@ -1,12 +1,13 @@
 import Poster from "../misc/Poster";
 import React from "react";
+import Recommendation from "../misc/Recommendation";
 
 const Anime = () => {
   return (
     <>
-      <Poster
+      <Recommendation
         title="My favorites"
-        url="discover/tv?api_key=141c72c7acc3ea796e0d0dc48bd8273c&with_networks=213"
+        url="54.242.3.245:8080/9"
       />
     </>
   );

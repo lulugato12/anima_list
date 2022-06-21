@@ -1,10 +1,9 @@
 import axios from  '../constants/axios'
-import {ImageUrl} from '../constants/constants';
+import {RecImageURL} from '../constants/constants';
 import React, { useEffect, useState } from "react";
 import "./Poster.css";
 
-function Poster(props) {
-
+function Recommendation(props) {
   const [show, setShow] = useState([])
   useEffect(() => {
     axios.get(props.url).then((response)=>{
@@ -21,7 +20,7 @@ function Poster(props) {
              return(
                 <img
                 className={props.isSmall ? 'smallposter': 'poster'}
-                src={`${ImageUrl+one.backdrop_path}`}
+                src={`${RecImageURL+one.backdrop_path}`}
                 alt="poster"
                 />
              )
@@ -32,4 +31,4 @@ function Poster(props) {
   );
 }
 
-export default Poster;
+export default Recommendation;

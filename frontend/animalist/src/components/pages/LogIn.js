@@ -1,8 +1,7 @@
 import React from "react";
-import { SignIn } from "../misc/auth";
+import { SignIn } from "../misc/Auth";
 
 const LogIn = () => {
-  console.log("Login");
   return (
     <>
       <section className="content-container">

@@ -1,5 +1,6 @@
 import Poster from "../misc/Poster";
 import React from "react";
+import { AnimeInfo } from "../misc/Anime";
 
 const Anime = () => {
   return (
