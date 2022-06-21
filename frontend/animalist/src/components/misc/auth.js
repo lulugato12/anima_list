@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { gql, useMutation } from "@apollo/react-hooks";
 import { AUTH_TOKEN } from "../constants/constants";
+import "./auth.css";
+import { Form, Container } from "react-bootstrap";
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
@@ -29,7 +31,7 @@ export function SignIn() {
     login: true,
     email: "",
     password: "",
-    name: "",
+    username: "",
   });
 
   const [login] = useMutation(LOGIN_MUTATION, {
@@ -45,7 +47,7 @@ export function SignIn() {
 
   const [signup] = useMutation(SIGNUP_MUTATION, {
     variables: {
-      name: formState.name,
+      username: formState.username,
       email: formState.email,
       password: formState.password,
     },
@@ -56,66 +58,49 @@ export function SignIn() {
   });
 
   return (
-    <div>
-      <h4 className="mv3">{formState.login ? "Login" : "Sign Up"}</h4>
-      <div className="flex flex-column">
-        {!formState.login && (
-          <input
-            value={formState.name}
-            onChange={(e) =>
-              setFormState({
-                ...formState,
-                name: e.target.value,
-              })
-            }
-            type="text"
-            placeholder="Your name"
-          />
-        )}
-        <input
-          value={formState.email}
-          onChange={(e) =>
-            setFormState({
-              ...formState,
-              email: e.target.value,
-            })
-          }
-          type="text"
-          placeholder="Your email address"
-        />
-        <input
-          value={formState.password}
-          onChange={(e) =>
-            setFormState({
-              ...formState,
-              password: e.target.value,
-            })
-          }
-          type="password"
-          placeholder="Choose a safe password"
-        />
-      </div>
-      <div className="flex mt3">
-        <button
-          className="pointer mr2 button"
-          onClick={() => console.log("onClick")}
-        >
-          {formState.login ? "login" : "create account"}
-        </button>
-        <button
-          className="pointer button"
-          onClick={(e) =>
-            setFormState({
-              ...formState,
-              login: !formState.login,
-            })
-          }
-        >
-          {formState.login
-            ? "need to create an account?"
-            : "already have an account?"}
-        </button>
-      </div>
-    </div>
+    <Container>
+      <h1>Log in</h1>
+      <Form className="login-form">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <div>
+            <input
+              type="text"
+              placeholder="Email"
+              className="login-field"
+              value={formState.email}
+              onChange={(e) =>
+                setFormState({
+                  ...formState,
+                  email: e.target.value,
+                })
+              }
+            />
+          </div>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              className="login-field"
+              value={formState.password}
+              onChange={(e) =>
+                setFormState({
+                  ...formState,
+                  password: e.target.value,
+                })
+              }
+            />
+          </div>
+        </Form.Group>
+      </Form>
+
+      <button className="login-button" onClick={() => console.log("Logged In")}>
+        Log in
+      </button>
+    </Container>
   );
 }

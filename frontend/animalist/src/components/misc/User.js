@@ -86,7 +86,6 @@ export function CreateUser() {
                   ref={(node) => {
                     username = node;
                   }}
-                  style={{ marginRight: "1em" }}
                 />
               </div>
             </Form.Group>
