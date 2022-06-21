@@ -1,23 +1,30 @@
-import React from 'react'
-import { Link } from "react-router-dom"
+import React from "react";
 
-import './Footer.css'
+import "./Footer.css";
 
 const MenuBar = () => {
-    return (
-        <footer >
-            <div className="footer">
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link href="/Anime">Anime</Link></li>
-                    <li><Link to="/Movies">Movies</Link></li>
-                    <li><Link to="/Ovas">OVAS</Link></li>
-                </ul>
+  return (
+    <footer>
+      <div className="footer">
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/Anime">Anime</a>
+          </li>
+          <li>
+            <a href="/Movies">Movies</a>
+          </li>
+          <li>
+            <a href="/Ovas">OVAS</a>
+          </li>
+        </ul>
 
-                <p>&copy; AnimaList. All rights reserved.</p>
-            </div>
-        </footer>
-    )
-}
+        <p>&copy; AnimaList. All rights reserved.</p>
+      </div>
+    </footer>
+  );
+};
 
 export default MenuBar;
