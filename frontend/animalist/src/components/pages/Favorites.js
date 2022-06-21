@@ -3,12 +3,10 @@ import React from "react";
 import Recommendation from "../misc/Recommendation";
 
 const Anime = () => {
+  const id = 5;
   return (
     <>
-      <Recommendation
-        title="My favorites"
-        url="54.242.3.245:8080/9"
-      />
+      <Recommendation title="My favorites" url={`/${id}/pictures`} />
     </>
   );
 };
