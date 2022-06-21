@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { UserInfo, CreateUser } from '../misc/User';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:8000/graphql/', // your GraphQL Server 
+  uri: 'http://localhost:8000/graphql/',
 });
 
 const SignUp = () => {
@@ -12,8 +12,8 @@ const SignUp = () => {
         <React.Fragment>
             <ApolloProvider client={client}>
                 <section className="content-container">
-                    <UserInfo />
                     <CreateUser />
+                    
                 </section>
             </ApolloProvider>
         </React.Fragment>

@@ -1,35 +1,20 @@
-import React from 'react'
+import React from 'react';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { SignIn } from '../misc/auth';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:8000/graphql/', // your GraphQL Server 
+});
 
 const LogIn = () => {
     return (
         <React.Fragment>
-            <section className="content-container">
-                <form>
-                    <h2 className="form-spacing">Log in</h2>
-
-                    <div className="form-group form-spacing">
-                        <label>Email</label>
-                        <input type="email" className="form-control" placeholder="Enter email" />
-                    </div>
-
-                    <div className="form-group form-spacing">
-                        <label>Password</label>
-                        <input type="password" className="form-control" placeholder="Enter password" />
-                    </div>
-
-                    <div className="form-group form-spacing">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                            <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                        </div>
-                    </div>
-
-                    <button type="submit" className="btn btn-dark btn-lg btn-block">Log in</button>
-                    <p className="forgot-password text-right">
-                        Forgot <a href="/">password?</a>
-                    </p>
-                </form>
-            </section>
+            <ApolloProvider client={client}>
+                <section className="content-container">
+                    <SignIn />
+                </section>
+            </ApolloProvider>
         </React.Fragment>
     )
 }

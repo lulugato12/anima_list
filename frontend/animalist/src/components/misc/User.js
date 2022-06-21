@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { Form, Container } from 'react-bootstrap'
 import { useQuery, useMutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
+import './User.css';
 
 const QUERY_USERS = gql`
     query {
@@ -50,6 +52,7 @@ export function CreateUser() {
     useEffect(()=>{
         console.log(data)
     }, [data])
+    
     return (
         <div>
             <form
@@ -71,32 +74,47 @@ export function CreateUser() {
                     } catch (error) {
                         console.log(error)
                     }
-                    
-                }}
-                style = {{ marginTop: '2em', marginBottom: '2em' }}
-            >    
-                <label>Username: </label>
-                <input
-                ref={node => {
-                    username = node;
-                }}
-                style={{ marginRight: '1em' }}
-                />     
-                <label>Email: </label>
-                <input
-                ref={node => {
-                    email = node;
-                }}
-                style={{ marginRight: '1em' }}
-                />
-                <label>Password: </label>
-                <input
-                ref={node => {
-                    password = node;
-                }}
-                style={{ marginRight: '1em' }}
-                />
-                <button type="submit" style={{ cursor: 'pointer' }}>Add a User</button>    
+                }}>    
+                <Container >
+                    <h1>Sign up</h1>
+                    <Form className='register-form'>
+                        <Form.Group className="mb-3" controlId="formBasicUsername">
+                            <Form.Label>Username</Form.Label>
+                            <div>
+                                <input className='register-field' placeholder='Username'
+                                    ref={node => {
+                                        username = node;
+                                    }}
+                                    style={{ marginRight: '1em' }}
+                                />     
+                            </div>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <div>
+                                <input className='register-field' placeholder='Email'
+                                    ref={node => {
+                                        email = node;
+                                    }}
+                                />   
+                            </div>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <div>
+                                <input className='register-field' placeholder='Password'
+                                    ref={node => {
+                                        password = node;
+                                    }}
+                                />     
+                            </div>
+                        </Form.Group>
+                    </Form>
+
+                    <button className='register-button' type="submit">Register</button>
+                </Container>    
             </form>
         </div>
     );
