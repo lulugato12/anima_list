@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery, useMutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
@@ -15,10 +15,12 @@ const QUERY_USERS = gql`
 const CREATE_USER = gql`
     mutation CreateUser($username: String!, $email: String!, $password: String!){
         createUser(username: $username, email: $email, password: $password){
-            id
-            username
-            email
-            password
+            user {
+                id
+                username
+                email
+                password
+            }
         }
     }
 `;
@@ -44,23 +46,32 @@ export function UserInfo() {
 
 export function CreateUser() {
     let username, email, password;  
-    const [createUser] = useMutation(CREATE_USER);
+    const [createUser, {data, error}] = useMutation(CREATE_USER);
+    useEffect(()=>{
+        console.log(data)
+    }, [data])
     return (
         <div>
             <form
-                onSubmit={e => {
-                    e.preventDefault();
-                    createUser({ 
-                        variables: {
-                            username: username.value,
-                            email: email.value,
-                            password: password.value
-                        } 
-                    });
-                    username.value = '';
-                    email.value = '';
-                    password.value = '';   
-                    window.location.reload();
+                onSubmit={async e => {
+                    try {
+                        e.preventDefault();
+                        const aux = await createUser({ 
+                            variables: {
+                                username: username.value,
+                                email: email.value,
+                                password: password.value
+                            } 
+                        });
+                        console.log(aux)
+                        username.value = '';
+                        email.value = '';
+                        password.value = '';   
+                        window.location.reload();
+                    } catch (error) {
+                        console.log(error)
+                    }
+                    
                 }}
                 style = {{ marginTop: '2em', marginBottom: '2em' }}
             >    
