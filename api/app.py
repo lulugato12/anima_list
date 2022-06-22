@@ -30,7 +30,7 @@ anime_feature = pd.concat([animes['title'], animes['genre']], axis=1)
 anime_feature['genre'] = anime_feature['genre'].apply(lambda x: extract_feature(x))
 
 @app.get("/{id}")
-def read_root(id):
+def read_root(id: int):
     test_data = anime_feature.take([id])
     output = None
     for row in test_data.iterrows():
