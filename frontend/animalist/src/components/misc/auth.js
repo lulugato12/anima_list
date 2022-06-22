@@ -7,20 +7,20 @@ import { Form, Container } from "react-bootstrap";
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
-    $email: String!
     $password: String!
     $username: String!
   ) {
-    signup(email: $email, password: $password, username: $username) {
+    signup(password: $password, username: $username) {
       token
     }
   }
 `;
 
 const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation LoginMutation($username: String!, $password: String!) {
+    tokenAuth(username: $username, password: $password) {
       token
+      payload
     }
   }
 `;
@@ -29,21 +29,11 @@ export function SignIn() {
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
     login: true,
-    email: "",
     password: "",
     username: "",
   });
 
-  const [login] = useMutation(LOGIN_MUTATION, {
-    variables: {
-      email: formState.email,
-      password: formState.password,
-    },
-    onCompleted: ({ login }) => {
-      localStorage.setItem(AUTH_TOKEN, login.token);
-      navigate("/");
-    },
-  });
+  const [login] = useMutation(LOGIN_MUTATION);
 
   const [signup] = useMutation(SIGNUP_MUTATION, {
     variables: {
@@ -65,6 +55,7 @@ export function SignIn() {
           <Form.Label>Email address</Form.Label>
           <div>
             <input
+              
               type="text"
               placeholder="Email"
               className="login-field"
@@ -72,7 +63,7 @@ export function SignIn() {
               onChange={(e) =>
                 setFormState({
                   ...formState,
-                  email: e.target.value,
+                  username: e.target.value,
                 })
               }
             />
@@ -98,7 +89,17 @@ export function SignIn() {
         </Form.Group>
       </Form>
 
-      <button className="login-button" onClick={() => console.log("Logged In")}>
+      <button className="login-button" onClick={async() => {
+        try {
+          const aux = await login({variables:formState})
+          console.log(aux.data.tokenAuth.token);
+          localStorage.setItem('AUTH_TOKEN', aux.data.tokenAuth.token)
+          navigate('/')
+        } 
+        catch (error) {
+          console.error(error);
+        }
+      }}>
         Log in
       </button>
     </Container>
