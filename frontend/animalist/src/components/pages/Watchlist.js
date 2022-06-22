@@ -4,7 +4,7 @@ import Recommendation from "../misc/Recommendation";
 import "./List.css";
 
 const Anime = () => {
-  const id = 32;
+  const id = 45;
   return (
     <>
     <Container className="cont-list">

@@ -1,5 +1,4 @@
 import axios from "../constants/axios";
-import { RecImageURL } from "../constants/constants";
 import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import "./Poster.css";

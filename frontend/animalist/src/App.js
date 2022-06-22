@@ -18,7 +18,7 @@ import { AUTH_TOKEN } from "./components/constants/constants";
 import "./App.css";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:8000/graphql/",
+  uri: "http://54.242.3.245:8008/graphql/",
 });
 
 const authLink = setContext((_, { headers }) => {
